@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/franciscojsc/educa-ifs-bot-telegram#readme",
   "dependencies": {
+    "path": "^0.12.7",
     "telegraf": "^3.38.0"
   }
 }
