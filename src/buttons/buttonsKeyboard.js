@@ -8,7 +8,16 @@ const twoButton = (firstText, secondText, columns = 1) => {
     .extra();
 };
 
+const threeButton = (firstText, secondText, threeText, columns = 1) => {
+  return Markup.keyboard([firstText, secondText, threeText], {
+    columns: columns,
+  })
+    .resize()
+    .extra();
+};
+
 module.exports = {
   oneButton,
   twoButton,
+  threeButton,
 };
