@@ -8,6 +8,12 @@ const botImage = path.join(__dirname, 'assets', 'imgs', 'educaIFS_bot.png');
 const buttonsKeyboard = require('./buttons/buttonsKeyboard');
 const buttonStart = buttonsKeyboard.oneButton('Vamos começar?');
 const buttonMenuDefault = buttonsKeyboard.twoButton('Quiz', 'Tutoriais', 2);
+const buttonSelectTutorial = buttonsKeyboard.threeButton(
+  'Primeiro projeto com Git',
+  'Contribuir com um projeto no GitHub',
+  'Voltar para o menu principal',
+  2
+);
 
 bot.catch((err, ctx) => {
   ctx.reply(
@@ -31,6 +37,23 @@ bot.hears([/vamos começar/i], async (ctx) => {
     'Clique nos botões abaixo, se quiser entrar no Quiz e testar seus conhecimentos, ou seguir os tutoriais disponíveis, vai ser bem legal!!!',
     buttonMenuDefault
   );
+});
+
+bot.hears(/Tutoriais/i, (ctx) => {
+  ctx.reply('Vamos lá, selecione algum tutorial.', buttonSelectTutorial);
+});
+
+bot.hears(/Primeiro projeto com Git/i, async (ctx) => {
+  await ctx.reply('Ok, boa escolha');
+  await ctx.reply('👍');
+});
+
+bot.hears(/Contribuir com um projeto no GitHub/i, (ctx) => {
+  ctx.reply('Em construção...', buttonSelectTutorial);
+});
+
+bot.hears(/Voltar para o menu principal/i, (ctx) => {
+  ctx.reply('Em construção....', buttonSelectTutorial);
 });
 
 bot.launch();
