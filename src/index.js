@@ -1,4 +1,6 @@
 const env = require('../.env');
+const session = require('telegraf/session');
+const Stage = require('telegraf/stage');
 const Telegraf = require('telegraf');
 const bot = new Telegraf(env.token);
 
@@ -14,6 +16,13 @@ const buttonSelectTutorial = buttonsKeyboard.threeButton(
   'Voltar para o menu principal',
   2
 );
+
+const wizardTutorialFirstProject = require('./tutorials/firstProjectGitWizard');
+
+const stage = new Stage([wizardTutorialFirstProject]);
+
+bot.use(session());
+bot.use(stage.middleware());
 
 bot.catch((err, ctx) => {
   ctx.reply(
@@ -46,6 +55,7 @@ bot.hears(/Tutoriais/i, (ctx) => {
 bot.hears(/Primeiro projeto com Git/i, async (ctx) => {
   await ctx.reply('Ok, boa escolha');
   await ctx.reply('👍');
+  await ctx.scene.enter('FIRST_PROJECT');
 });
 
 bot.hears(/Contribuir com um projeto no GitHub/i, (ctx) => {
