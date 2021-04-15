@@ -4,6 +4,7 @@ const createProjectHandler = require('./steps/createProjectHandler');
 const startRepositoryGitHandler = require('./steps/startRepositoryGitHandler');
 const fileStatusLifecycleHandler = require('./steps/fileStatusLifecycleHandler');
 const mainSectionsGitProjectHandler = require('./steps/mainSectionsGitProjectHandler');
+const GitStatusCommandHandler = require('./steps/GitStatusCommandHandler');
 
 const buttonsInline = require('./../buttons/buttonsInline');
 
@@ -23,6 +24,7 @@ const firstProjectGitWizard = new WizardScene(
   startRepositoryGitHandler,
   fileStatusLifecycleHandler,
   mainSectionsGitProjectHandler,
+  GitStatusCommandHandler,
   (ctx) => {
     ctx.reply('Tchau');
     return ctx.scene.leave();
