@@ -9,6 +9,7 @@ const GitAddCommandHandler = require('./steps/GitAddCommandHandler');
 const configUserEmailHandler = require('./steps/configUserEmailHandler');
 const GitCommitCommandHandler = require('./steps/GitCommitCommandHandler');
 const GitLogCommandHandler = require('./steps/GitLogCommandHandler');
+const editFileHandler = require('./steps/editFileHandler');
 
 const buttonsInline = require('./../buttons/buttonsInline');
 
@@ -33,6 +34,7 @@ const firstProjectGitWizard = new WizardScene(
   configUserEmailHandler,
   GitCommitCommandHandler,
   GitLogCommandHandler,
+  editFileHandler,
   (ctx) => {
     ctx.reply('Tchau');
     return ctx.scene.leave();
