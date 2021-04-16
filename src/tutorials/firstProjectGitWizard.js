@@ -6,6 +6,7 @@ const fileStatusLifecycleHandler = require('./steps/fileStatusLifecycleHandler')
 const mainSectionsGitProjectHandler = require('./steps/mainSectionsGitProjectHandler');
 const GitStatusCommandHandler = require('./steps/GitStatusCommandHandler');
 const GitAddCommandHandler = require('./steps/GitAddCommandHandler');
+const configUserEmailHandler = require('./steps/configUserEmailHandler');
 
 const buttonsInline = require('./../buttons/buttonsInline');
 
@@ -27,6 +28,7 @@ const firstProjectGitWizard = new WizardScene(
   mainSectionsGitProjectHandler,
   GitStatusCommandHandler,
   GitAddCommandHandler,
+  configUserEmailHandler,
   (ctx) => {
     ctx.reply('Tchau');
     return ctx.scene.leave();
