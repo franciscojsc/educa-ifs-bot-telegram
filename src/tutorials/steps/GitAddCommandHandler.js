@@ -29,7 +29,7 @@ const GitAddCommandHandler = new Composer();
 
 GitAddCommandHandler.action('c', async (ctx) => {
   await ctx.replyWithMarkdown(
-    'O comando `git add` é utilizado para mover arquivos do diretório de trabalho (_Working Directory_) para a área de preparo (Staging Area).'
+    'O comando `git add` é utilizado para mover arquivos do diretório de trabalho (_Working Directory_) para a área de preparo (_Staging Area_).'
   );
   await ctx.reply('Execute o código a seguir:');
   await ctx.replyWithPhoto({
@@ -39,7 +39,7 @@ GitAddCommandHandler.action('c', async (ctx) => {
     'Agora vamos observar o status do arquivo com o comando `git status`'
   );
   await ctx.replyWithMarkdown(
-    'A saída deve está semelhante a imagem abaixo, que mostra que temos um arquivo adicionado na área de preparo (Staging Area)'
+    'A saída deve está semelhante a imagem abaixo, que mostra que temos um arquivo adicionado na área de preparo (_Staging Area_)'
   );
   await ctx.replyWithPhoto(
     {

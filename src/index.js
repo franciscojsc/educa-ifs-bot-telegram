@@ -41,10 +41,10 @@ bot.start(async (ctx) => {
 
 bot.hears([/vamos começar/i], async (ctx) => {
   await ctx.reply(
-    'Meus conhecimentos atualmente são sobre a tecnologia Git, se tiver alguma dúvida, envie uma mensagem para mim, e tentarei responder, 😉 Ok'
+    'Meus conhecimentos atualmente são sobre a tecnologia Git, se tiver alguma dúvida, envie uma mensagem para mim e tentarei responder, 😉 Ok'
   );
   await ctx.reply(
-    'Clique nos botões abaixo, se quiser entrar no Quiz e testar seus conhecimentos, ou seguir os tutoriais disponíveis, vai ser bem legal!!!',
+    'Clique nos botões abaixo, se quiser entrar no Quiz e testar seus conhecimentos, ou vamos comigo fazer alguns dos  tutoriais disponíveis, vai ser bem legal!!! ',
     buttonMenuDefault
   );
 });

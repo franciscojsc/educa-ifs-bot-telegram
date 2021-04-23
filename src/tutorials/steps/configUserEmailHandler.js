@@ -38,7 +38,7 @@ const configUserEmailHandler = new Composer();
 
 configUserEmailHandler.action('c', async (ctx) => {
   await ctx.reply(
-    'Antes dos próximos passos, precisaremos realizar uma configuração para identificar o nosso usuário.'
+    'Antes dos próximos passos, precisaremos realizar uma configuração 🔧 para identificar o nosso usuário.'
   );
   await ctx.reply(
     'Utilize os comandos a seguir, alterando o nome e email colocando o seu:'
@@ -53,7 +53,7 @@ configUserEmailHandler.action('c', async (ctx) => {
     source: imageCommandGitConfigGlobalList,
   });
   await ctx.replyWithMarkdown(
-    'A saída do comando acima deve exibir o seu nome de seu usuário e email, ok',
+    'A saída do comando acima 👆 deve exibir o seu nome de seu usuário e email, ok',
     buttonContinue
   );
   return ctx.wizard.next();

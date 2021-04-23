@@ -38,29 +38,29 @@ GitReviewHandler.action('c', async (ctx) => {
 
 GitReviewHandler.action('ok', async (ctx) => {
   await ctx.replyWithMarkdown(
-    'Se visualizamos o histórico de _commits_, podemos ver que temos duas versões.'
+    'Se observarmos o histórico de _commits_, podemos ver que temos duas versões.'
   );
   await ctx.replyWithMarkdown('`git log`');
   await ctx.replyWithPhoto({
     source: imageCommandGitLogTwoVersion,
   });
   await ctx.reply(
-    'Lembre-se que para sair do modo de visualização do histórico, pressione a tecla Q do teclado :)',
+    'Lembre-se que para sair do modo de visualização do histórico, pressione a tecla Q do teclado ⌨',
     buttonNext
   );
 });
 
 GitReviewHandler.action('proximo', async (ctx) => {
-  await ctx.reply('Pronto aprendermos o básico sobre o Git.');
+  await ctx.reply('Pronto, aprendermos o básico sobre o Git.');
   await ctx.reply('🎉');
   await ctx.replyWithMarkdown(
-    'De forma resumida o fluxo básico de trabalho com Git:'
+    'De forma resumida, este é o fluxo básico de trabalho com Git:'
   );
   await ctx.replyWithMarkdown(
     `
-1. Adiciona ou altera arquivos, no diretório de trabalho (_Working Directory_)
-2. Move os arquivos para área de preparo (_Staging Area_)
-3. Faz o commit dos arquivos que estão na área de preparo`,
+1. Adicionar ou alterar arquivos no diretório de trabalho (_Working Directory_)
+2. Mover os arquivos para área de preparo (_Staging Area_)
+3. Fazer o _commit_ dos arquivos que estão na área de preparo`,
     buttonExit
   );
   return ctx.wizard.next();

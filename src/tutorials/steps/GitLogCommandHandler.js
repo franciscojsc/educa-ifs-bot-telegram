@@ -44,7 +44,7 @@ GitLogCommandHandler.action('c', async (ctx) => {
     source: imageCommandGitLogResult,
   });
   await ctx.replyWithMarkdown(
-    'Para sair da visualização do histórico, clique na letra Q do teclado.',
+    'Para sair da visualização do histórico, clique na letra Q do teclado ⌨.',
     buttonContinue
   );
   return ctx.wizard.next();

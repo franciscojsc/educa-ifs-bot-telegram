@@ -15,11 +15,11 @@ mainSectionsGitProjectHandler.action('c', async (ctx) => {
   await ctx.reply('O Git possui três seções principais:');
 
   await ctx.replyWithMarkdown(
-    `- Diretório de trabalho (_Working Directory_)
+    `- Diretório de trabalho (_Working Directory_):
   Arquivos adicionados ou modificados do projeto.
-- Área de preparo (_Staging Area_)
+- Área de preparo (_Staging Area_):
   Local para reunir os arquivos antes de criar um nova versão.
-- Diretório Git (_Repository_)
+- Diretório Git (_Repository_):
   Onde fica armazenado as informações sobre o projeto.`,
     buttonContinue
   );

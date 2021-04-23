@@ -29,12 +29,14 @@ const imageCommandGitInitResult = path.join(
 const startRepositoryGitHandler = new Composer();
 
 startRepositoryGitHandler.action(['y', 'ok'], async (ctx) => {
-  await ctx.reply('Agora vamos iniciar o repositório Git na pasta site-bot.');
+  await ctx.replyWithMarkdown(
+    'Agora vamos iniciar o repositório Git na pasta `site-bot`.'
+  );
   await ctx.replyWithMarkdown(
     `O comando \`git init\` é utilizado para iniciar o repositório local, pode ser utilizado em uma pasta vazia ou com arquivos existentes.`
   );
   await ctx.replyWithMarkdown(
-    'Abra o terminal, e dentro da pasta **site-bot** execute o código a seguir:'
+    'Abra o terminal, e dentro da pasta `site-bot` execute o código a seguir:'
   );
   await ctx.replyWithPhoto(
     {
@@ -44,7 +46,7 @@ startRepositoryGitHandler.action(['y', 'ok'], async (ctx) => {
       caption: 'Comando para iniciar um repositório Git',
     }
   );
-  await ctx.reply('A saída deve está semelhante a imagem abaixo');
+  await ctx.reply('A saída deve estar semelhante a imagem abaixo');
   await ctx.replyWithPhoto(
     {
       source: imageCommandGitInitResult,
@@ -56,7 +58,7 @@ startRepositoryGitHandler.action(['y', 'ok'], async (ctx) => {
 
 startRepositoryGitHandler.action('n', async (ctx) => {
   await ctx.reply('Ok, estou aguardando você, ✌️');
-  await ctx.reply('Confirme, quando terminar', buttonOK);
+  await ctx.reply('Confirme quando terminar', buttonOK);
 });
 
 startRepositoryGitHandler.hears(/Sair do tutorial/i, async (ctx) => {

@@ -28,7 +28,7 @@ editFileHandler.action('c', async (ctx) => {
     'Abra o arquivo `index.html` com seu editor de texto preferido e altere a linha do título adicionando o conteúdo a seguir com o seu nome.'
   );
   await ctx.replyWithMarkdown('`<h1>Seu nome</h1>`');
-  await ctx.reply('Vai fica mais ou menos com está na imagem abaixo ');
+  await ctx.reply('Vai ficar mais ou menos com está na imagem abaixo');
   await ctx.reply('👇');
   await ctx.replyWithPhoto(
     {

@@ -31,7 +31,9 @@ GitStatusCommandHandler.action('c', async (ctx) => {
   await ctx.replyWithMarkdown(
     'O comando `git status` é muito útil para podemos ver os status dos arquivos, iremos utilizar bastante.'
   );
-  await ctx.reply('Execute o código a seguir, no projeto site-bot:');
+  await ctx.replyWithMarkdown(
+    'Execute o código a seguir no projeto `site-bot`:'
+  );
   await ctx.replyWithPhoto(
     {
       source: imageCommandGitStatus,
@@ -41,7 +43,7 @@ GitStatusCommandHandler.action('c', async (ctx) => {
     }
   );
   await ctx.replyWithMarkdown(
-    'A saída deve está semelhante a imagem abaixo, que mostra que temos um arquivo com o status `untracked`.'
+    'A saída deve estar semelhante a imagem abaixo, que mostra que temos um arquivo com o status `untracked`.'
   );
   await ctx.replyWithPhoto(
     {
