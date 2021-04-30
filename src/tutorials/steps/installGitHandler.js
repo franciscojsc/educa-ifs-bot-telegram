@@ -29,12 +29,9 @@ installGitHandler.action('y', async (ctx) => {
     'Certo, então, vamos utilizar o Git Bash que foi instalado junto com o Git'
   );
   await ctx.reply(
-    `O Git Bash é um aplicativo, instalado com o Git no sistema Windows, que permite utilizar comandos do Bash.`
+    `O Git Bash é um aplicativo, instalado com o Git no sistema Windows, que permite utilizar comandos do Bash.`,
+    buttonContinue
   );
-  await ctx.replyWithMarkdown(
-    'Crie uma pasta para o nosso projeto com o nome `site-bot`'
-  );
-  await ctx.reply('Já criou? Estou esperando 😉', buttonConfirm);
   return ctx.wizard.next();
 });
 
@@ -42,11 +39,7 @@ installGitHandler.action('n', async (ctx) => {
   await ctx.reply('Blz, menos mau, kkk');
   await ctx.replyWithPhoto('http://gph.is/1g9ATqH');
   await ctx.reply('😂');
-  await ctx.reply('Brincadeiras à parte, vamos continuar');
-  await ctx.replyWithMarkdown(
-    'Crie uma pasta para o nosso projeto com o nome `site-bot`'
-  );
-  await ctx.reply('Já criou? Estou esperando 😉', buttonConfirm);
+  await ctx.reply('Brincadeiras à parte, vamos continuar', buttonContinue);
   return ctx.wizard.next();
 });
 
