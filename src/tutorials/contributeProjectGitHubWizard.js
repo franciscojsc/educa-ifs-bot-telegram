@@ -7,6 +7,7 @@ const createBranchProjectGitHubHandler = require('./steps/createBranchProjectGit
 const addNewContributorFileHandler = require('./steps/addNewContributorFileHandler');
 const commitNewContributorFileHandler = require('./steps/commitNewContributorFileHandler');
 const pushBranchNewContributorGitHubHandler = require('./steps/pushBranchNewContributorGitHubHandler');
+const createPullRequestProjectGitHubHandler = require('./steps/createPullRequestProjectGitHubHandler');
 
 const buttonsInline = require('./../buttons/buttonsInline');
 
@@ -32,6 +33,7 @@ const contributeProjectGitHubWizard = new WizardScene(
   addNewContributorFileHandler,
   commitNewContributorFileHandler,
   pushBranchNewContributorGitHubHandler,
+  createPullRequestProjectGitHubHandler,
   (ctx) => {
     ctx.reply('Tchau');
     return ctx.scene.leave();
