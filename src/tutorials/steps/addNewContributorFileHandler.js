@@ -14,10 +14,10 @@ addNewContributorFileHandler.action('c', async (ctx) => {
     'Deixe o terminal aberto, vamos utiliza-ló ainda e siga os próximos passos'
   );
   await ctx.replyWithMarkdown(
-    'Nesse momento, sem utilizar o terminal, procure pela pasta `educa-ifs-treinamento` que baixamos, ela deve estar na "Área de trabalho" ou no seu" diretório pessoal".'
+    'Nesse momento, sem utilizar o terminal, procure pela pasta `educa-ifs-treinamento` que baixamos, ela deve estar na "Área de trabalho" ou no seu "diretório pessoal".'
   );
   await ctx.replyWithMarkdown(
-    'Dentro do pasta tem um arquivo com o nome `contribuidores.txt`',
+    'Dentro da pasta tem um arquivo com o nome `contribuidores.txt`',
     buttonOK
   );
 });
