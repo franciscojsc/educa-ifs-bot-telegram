@@ -1,5 +1,6 @@
 const WizardScene = require('telegraf/scenes/wizard');
 const installGitHandler = require('./steps/installGitHandler');
+const createAccountGitHubHandler = require('./steps/createAccountGitHubHandler');
 
 const buttonsInline = require('./../buttons/buttonsInline');
 
@@ -18,6 +19,7 @@ const contributeProjectGitHubWizard = new WizardScene(
     return ctx.wizard.next();
   },
   installGitHandler,
+  createAccountGitHubHandler,
   (ctx) => {
     ctx.reply('Tchau');
     return ctx.scene.leave();
