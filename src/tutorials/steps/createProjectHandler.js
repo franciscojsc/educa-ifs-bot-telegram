@@ -17,6 +17,13 @@ const fileHTML = path.join(
 
 const createProjectHandler = new Composer();
 
+createProjectHandler.action('c', async (ctx) => {
+  await ctx.replyWithMarkdown(
+    'Crie uma pasta para o nosso projeto com o nome `site-bot`'
+  );
+  await ctx.reply('Já criou? Estou esperando 😉', buttonConfirm);
+});
+
 createProjectHandler.action('y', async (ctx) => {
   await ctx.reply(
     'Agora entre na pasta que você criou, e adicione este arquivo dentro'

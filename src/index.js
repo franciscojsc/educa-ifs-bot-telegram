@@ -19,8 +19,12 @@ const buttonSelectTutorial = buttonsKeyboard.threeButton(
 );
 
 const wizardTutorialFirstProject = require('./tutorials/firstProjectGitWizard');
+const wizardContributeProjectGitHub = require('./tutorials/contributeProjectGitHubWizard');
 
-const stage = new Stage([wizardTutorialFirstProject]);
+const stage = new Stage([
+  wizardTutorialFirstProject,
+  wizardContributeProjectGitHub,
+]);
 
 bot.use(session());
 bot.use(stage.middleware());
@@ -59,8 +63,10 @@ bot.hears(/Primeiro projeto com Git/i, async (ctx) => {
   await ctx.scene.enter('FIRST_PROJECT');
 });
 
-bot.hears(/Contribuir com um projeto no GitHub/i, (ctx) => {
-  ctx.reply('Em construção...', buttonSelectTutorial);
+bot.hears(/Contribuir com um projeto no GitHub/i, async (ctx) => {
+  await ctx.reply('Ok, boa escolha');
+  await ctx.reply('👍', buttonExitTutorial);
+  await ctx.scene.enter('CONTRIBUTE_PROJECT_GITHUB');
 });
 
 bot.hears(/Voltar para o menu principal/i, (ctx) => {
