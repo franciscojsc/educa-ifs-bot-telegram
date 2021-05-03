@@ -12,6 +12,7 @@ const GitLogCommandHandler = require('./steps/GitLogCommandHandler');
 const editFileHandler = require('./steps/editFileHandler');
 const GitReviewHandler = require('./steps/GitReviewHandler');
 const explainProjectPublication = require('./steps/explainProjectPublication');
+const createAccountGitHubHandler = require('./steps/createAccountGitHubHandler');
 const RateTutorialHandler = require('./steps/RateTutorialHandler');
 
 const buttonsInline = require('./../buttons/buttonsInline');
@@ -41,6 +42,7 @@ const firstProjectGitWizard = new WizardScene(
   editFileHandler,
   GitReviewHandler,
   explainProjectPublication,
+  createAccountGitHubHandler,
   RateTutorialHandler,
   (ctx) => {
     ctx.reply('Tchau');
