@@ -18,11 +18,7 @@ createAccountGitHubHandler.action(['y', 'ok'], async (ctx) => {
   await ctx.reply(
     'Maravilha, agora que temos todos os requisitos, vamos iniciar'
   );
-  await ctx.reply('Acesse o repositório do link abaixo');
-  await ctx.reply(
-    'https://github.com/franciscojsc/educa-ifs-treinamento',
-    buttonContinue
-  );
+  await ctx.reply('👏', buttonContinue);
   return ctx.wizard.next();
 });
 

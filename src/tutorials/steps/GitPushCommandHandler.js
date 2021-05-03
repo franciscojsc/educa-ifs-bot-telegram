@@ -5,19 +5,22 @@ const buttonsKeyboard = require('./../../buttons/buttonsKeyboard');
 const buttonMenuDefault = buttonsKeyboard.twoButton('Quiz', 'Tutoriais', 2);
 const buttonContinue = buttonsInline.oneButton('Continuar?', 'c');
 
-const forkProjectGitHubHandler = new Composer();
+const GitPushCommandHandler = new Composer();
 
-forkProjectGitHubHandler.action('c', async (ctx) => {
-  await ctx.reply('Acesse o repositório do link abaixo');
-  await ctx.reply('https://github.com/franciscojsc/educa-ifs-treinamento');
+GitPushCommandHandler.action('c', async (ctx) => {
+  await ctx.reply('Chegou o momento tão esperado, vamos enviar nosso código');
+  await ctx.reply('🚀🚀🚀');
   await ctx.replyWithMarkdown(
-    'Clique no botão `Fork`, para realizar uma cópia do repositório para o seu usuário',
+    'Utilizaremos o comando `git push origin main` que o GitHub forneceu para publicar o projeto online'
+  );
+  await ctx.replyWithMarkdown(
+    'O comando `git push` é responsável por enviar os commits para o servidor',
     buttonContinue
   );
   return ctx.wizard.next();
 });
 
-forkProjectGitHubHandler.hears(/Sair do tutorial/i, async (ctx) => {
+GitPushCommandHandler.hears(/Sair do tutorial/i, async (ctx) => {
   await ctx.reply(
     'Ok, saindo do tutorial, que tal outro tutorial ou um quiz?',
     buttonMenuDefault
@@ -25,8 +28,8 @@ forkProjectGitHubHandler.hears(/Sair do tutorial/i, async (ctx) => {
   await ctx.scene.leave();
 });
 
-forkProjectGitHubHandler.on('message', (ctx) => {
+GitPushCommandHandler.on('message', (ctx) => {
   ctx.reply('Confirme clicando nos botões :)');
 });
 
-module.exports = forkProjectGitHubHandler;
+module.exports = GitPushCommandHandler;

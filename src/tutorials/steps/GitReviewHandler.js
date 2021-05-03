@@ -3,7 +3,7 @@ const buttonsInline = require('./../../buttons/buttonsInline');
 const buttonsKeyboard = require('./../../buttons/buttonsKeyboard');
 
 const buttonMenuDefault = buttonsKeyboard.twoButton('Quiz', 'Tutoriais', 2);
-const buttonExit = buttonsInline.oneButton('Finalizar Tutorial?', 'exit');
+const buttonContinue = buttonsInline.oneButton('Continuar?', 'c');
 const buttonNext = buttonsInline.oneButton('Continuar?', 'proximo');
 const buttonOk = buttonsInline.oneButton('OK?', 'ok');
 
@@ -61,7 +61,7 @@ GitReviewHandler.action('proximo', async (ctx) => {
 1. Adicionar ou alterar arquivos no diretório de trabalho (_Working Directory_)
 2. Mover os arquivos para área de preparo (_Staging Area_)
 3. Fazer o _commit_ dos arquivos que estão na área de preparo`,
-    buttonExit
+    buttonContinue
   );
   return ctx.wizard.next();
 });
