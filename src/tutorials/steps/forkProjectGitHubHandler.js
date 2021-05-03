@@ -8,6 +8,8 @@ const buttonContinue = buttonsInline.oneButton('Continuar?', 'c');
 const forkProjectGitHubHandler = new Composer();
 
 forkProjectGitHubHandler.action('c', async (ctx) => {
+  await ctx.reply('Acesse o repositório do link abaixo');
+  await ctx.reply('https://github.com/franciscojsc/educa-ifs-treinamento');
   await ctx.replyWithMarkdown(
     'Clique no botão `Fork`, para realizar uma cópia do repositório para o seu usuário',
     buttonContinue
