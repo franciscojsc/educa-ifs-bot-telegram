@@ -16,6 +16,7 @@ const createAccountGitHubHandler = require('./steps/createAccountGitHubHandler')
 const createRepositoryFirstProject = require('./steps/createRepositoryFirstProject');
 const GitRemoteCommandHandler = require('./steps/GitRemoteCommandHandler');
 const GitPushCommandHandler = require('./steps/GitPushCommandHandler');
+const finishPublishFirstProject = require('./steps/finishPublishFirstProject');
 const RateTutorialHandler = require('./steps/RateTutorialHandler');
 
 const buttonsInline = require('./../buttons/buttonsInline');
@@ -49,6 +50,7 @@ const firstProjectGitWizard = new WizardScene(
   createRepositoryFirstProject,
   GitRemoteCommandHandler,
   GitPushCommandHandler,
+  finishPublishFirstProject,
   RateTutorialHandler,
   (ctx) => {
     ctx.reply('Tchau');
