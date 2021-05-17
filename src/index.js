@@ -10,6 +10,7 @@ const botImage = path.join(__dirname, 'assets', 'imgs', 'educaIFS_bot.png');
 const buttonsKeyboard = require('./buttons/buttonsKeyboard');
 const buttonStart = buttonsKeyboard.oneButton('Vamos começar?');
 const buttonExitTutorial = buttonsKeyboard.oneButton('Sair do tutorial');
+const buttonExitQuiz = buttonsKeyboard.oneButton('Sair do Quiz');
 const buttonMenuDefault = buttonsKeyboard.twoButton('Quiz', 'Tutoriais', 2);
 const buttonSelectTutorial = buttonsKeyboard.threeButton(
   'Primeiro projeto com Git',
@@ -20,10 +21,12 @@ const buttonSelectTutorial = buttonsKeyboard.threeButton(
 
 const wizardTutorialFirstProject = require('./tutorials/firstProjectGitWizard');
 const wizardContributeProjectGitHub = require('./tutorials/contributeProjectGitHubWizard');
+const wizardQuizGit = require('./quiz/quizGitWizard');
 
 const stage = new Stage([
   wizardTutorialFirstProject,
   wizardContributeProjectGitHub,
+  wizardQuizGit,
 ]);
 
 bot.use(session());
@@ -67,6 +70,14 @@ bot.hears(/Contribuir com um projeto no GitHub/i, async (ctx) => {
   await ctx.reply('Ok, boa escolha');
   await ctx.reply('👍', buttonExitTutorial);
   await ctx.scene.enter('CONTRIBUTE_PROJECT_GITHUB');
+});
+
+bot.hears(/Quiz/i, async (ctx) => {
+  await ctx.reply(
+    'Legal, agora vamos testar seus conhecimentos sobre o Git',
+    buttonExitQuiz
+  );
+  await ctx.scene.enter('QUIZ_GIT');
 });
 
 bot.hears(/Voltar para o menu principal/i, (ctx) => {
