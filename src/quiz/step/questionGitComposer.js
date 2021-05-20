@@ -94,8 +94,8 @@ const continueQuestion = async (ctx) => {
 const score = async (ctx) => {
   const { right, wrong } = ctx.wizard.state;
   await ctx.reply(`Sua pontuação:
-    Acertou: ${right}
-    Errou: ${wrong}`);
+    Acertou: ${right || 0}
+    Errou: ${wrong || 0}`);
 };
 
 const updateQuestion = async (ctx) => {
