@@ -81,7 +81,10 @@ bot.hears(/Quiz/i, async (ctx) => {
 });
 
 bot.hears(/Voltar para o menu principal/i, (ctx) => {
-  ctx.reply('Em construção....', buttonSelectTutorial);
+  ctx.replyWithMarkdown(
+    'Escolha alguma opção: **Quiz** ou **Tutoriais**',
+    buttonMenuDefault
+  );
 });
 
 bot.launch();
