@@ -87,4 +87,8 @@ bot.hears(/Voltar para o menu principal/i, (ctx) => {
   );
 });
 
+bot.on('message', async (ctx) => {
+  await ctx.reply('Ops! Não entendi, tente novamente', buttonMenuDefault);
+});
+
 bot.launch();
