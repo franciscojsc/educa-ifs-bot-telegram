@@ -1,4 +1,3 @@
-require('dotenv').config();
 const session = require('telegraf/session');
 const Stage = require('telegraf/stage');
 const Telegraf = require('telegraf');
@@ -91,4 +90,4 @@ bot.on('message', async (ctx) => {
   await ctx.reply('Ops! Não entendi, tente novamente', buttonMenuDefault);
 });
 
-bot.launch();
+module.exports = bot;
