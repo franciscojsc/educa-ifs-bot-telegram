@@ -1,8 +1,8 @@
-const env = require('../.env');
+require('dotenv').config();
 const session = require('telegraf/session');
 const Stage = require('telegraf/stage');
 const Telegraf = require('telegraf');
-const bot = new Telegraf(env.token);
+const bot = new Telegraf(process.env.TOKEN);
 
 const path = require('path');
 const botImage = path.join(__dirname, 'assets', 'imgs', 'educaIFS_bot.png');
