@@ -24,6 +24,7 @@
   "homepage": "https://github.com/franciscojsc/educa-ifs-bot-telegram#readme",
   "dependencies": {
     "dotenv": "^9.0.2",
+    "mongoose": "^5.12.10",
     "path": "^0.12.7",
     "telegraf": "^3.38.0"
   }
