@@ -5,7 +5,7 @@ const Markup = require('telegraf/markup');
 const buttonsKeyboard = require('./../../buttons/buttonsKeyboard');
 const buttonMenuDefault = buttonsKeyboard.twoButton('Quiz', 'Tutoriais', 2);
 
-const db = require('../db.json');
+const Quiz = require('./../../models/quiz');
 
 const questionGitComposer = new Composer();
 
@@ -64,7 +64,10 @@ const loadQuestion = (questions, position) => {
 };
 
 const initQuestion = async (ctx) => {
+  const db = await loadDB();
+
   if (db.length > 0) {
+    ctx.wizard.state['db'] = db;
     ctx.wizard.state['position'] = 0;
     ctx.wizard.state['size'] = db.length - 1;
     ctx.wizard.state['right'] = 0;
@@ -76,6 +79,15 @@ const initQuestion = async (ctx) => {
     );
     return ctx.scene.leave();
   }
+};
+
+const loadDB = async () => {
+  return await Quiz.find({}).select({
+    _id: 0,
+    question: 1,
+    answers: 1,
+    rightAnswer: 1,
+  });
 };
 
 const continueQuestion = async (ctx) => {
@@ -99,7 +111,7 @@ const score = async (ctx) => {
 };
 
 const updateQuestion = async (ctx) => {
-  const { position, size } = ctx.wizard.state;
+  const { position, size, db } = ctx.wizard.state;
 
   if (position <= size) {
     const position = ctx.wizard.state.position++;
