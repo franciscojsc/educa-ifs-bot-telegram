@@ -11,7 +11,6 @@ questionGitComposer.action('ok', async (ctx) => {
   initQuestion(ctx);
   continueQuestion(ctx);
   updateQuestion(ctx);
-  return this;
 });
 
 questionGitComposer.action('right', async (ctx) => {
@@ -19,7 +18,6 @@ questionGitComposer.action('right', async (ctx) => {
   await ctx.replyWithMarkdown('👍');
   continueQuestion(ctx);
   updateQuestion(ctx);
-  return this;
 });
 
 questionGitComposer.action('wrong', async (ctx) => {
@@ -30,7 +28,6 @@ questionGitComposer.action('wrong', async (ctx) => {
   await ctx.replyWithMarkdown('👎');
   continueQuestion(ctx);
   updateQuestion(ctx);
-  return this;
 });
 
 questionGitComposer.hears(/Sair do Quiz/i, async (ctx) => {
