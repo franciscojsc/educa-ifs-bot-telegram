@@ -3,10 +3,20 @@ version: '3.1'
 services:
   mongo:
     image: mongo:4.4.6
+    command:
+      - /bin/bash
+      - -c
+      - |
+        apt update &&
+        apt install -y wget &&
+        wget -c $$MONGO_INITDB_URL_SCRIPT -P /docker-entrypoint-initdb.d &&
+        docker-entrypoint.sh mongod
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: toor
+      MONGO_INITDB_DATABASE: educaifs
+      MONGO_INITDB_URL_SCRIPT: https://gist.githubusercontent.com/franciscojsc/71ec2327e23d6e48f1b9bb888628e16c/raw/2e3c917ee0697bf6df3a71aba972b91c85232065/db.js
 
   mongo-express:
     image: mongo-express:0.54.0
