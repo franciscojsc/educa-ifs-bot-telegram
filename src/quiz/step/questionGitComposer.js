@@ -5,15 +5,12 @@ const Markup = require('telegraf/markup');
 const buttonsKeyboard = require('./../../buttons/buttonsKeyboard');
 const buttonMenuDefault = buttonsKeyboard.twoButton('Quiz', 'Tutoriais', 2);
 
-const db = require('../db.json');
-
 const questionGitComposer = new Composer();
 
 questionGitComposer.action('ok', async (ctx) => {
   initQuestion(ctx);
   continueQuestion(ctx);
   updateQuestion(ctx);
-  return this;
 });
 
 questionGitComposer.action('right', async (ctx) => {
@@ -21,7 +18,6 @@ questionGitComposer.action('right', async (ctx) => {
   await ctx.replyWithMarkdown('👍');
   continueQuestion(ctx);
   updateQuestion(ctx);
-  return this;
 });
 
 questionGitComposer.action('wrong', async (ctx) => {
@@ -32,7 +28,6 @@ questionGitComposer.action('wrong', async (ctx) => {
   await ctx.replyWithMarkdown('👎');
   continueQuestion(ctx);
   updateQuestion(ctx);
-  return this;
 });
 
 questionGitComposer.hears(/Sair do Quiz/i, async (ctx) => {
@@ -64,6 +59,7 @@ const loadQuestion = (questions, position) => {
 };
 
 const initQuestion = async (ctx) => {
+  const { db } = ctx.wizard.state;
   if (db.length > 0) {
     ctx.wizard.state['position'] = 0;
     ctx.wizard.state['size'] = db.length - 1;
@@ -99,7 +95,7 @@ const score = async (ctx) => {
 };
 
 const updateQuestion = async (ctx) => {
-  const { position, size } = ctx.wizard.state;
+  const { position, size, db } = ctx.wizard.state;
 
   if (position <= size) {
     const position = ctx.wizard.state.position++;
