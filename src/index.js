@@ -37,11 +37,42 @@ bot.catch((err, ctx) => {
   );
 });
 
+const User = require('./models/user');
+
+const verifyUser = async (ctx) => {
+  const name = ctx.update.message.from.first_name;
+
+  try {
+    const id = String(ctx.update.message.from.id);
+    const user = await User.findOne({ id_telegram: id });
+
+    if (!user) {
+      await ctx.reply(
+        `Olá ${name}, eu sou um Bot 🤖 e o meu nome é Educa IFS, mas você pode me chamar de Edu 😃!`
+      );
+      await User.create({
+        id_telegram: id,
+        first_name: name,
+        init_chat: true,
+      });
+    } else {
+      await ctx.reply(
+        `Olá ${name}, prazer te ver de novo!
+        Fique à vontade 😃`
+      );
+    }
+  } catch (e) {
+    await ctx.reply(
+      `Olá ${name}, eu sou um Bot 🤖 e o meu nome é Educa IFS, mas você pode me chamar de Edu 😃!`
+    );
+    await ctx.reply(
+      `Neste momento não estou com todas as minhas capacidades carregadas, mas pode ficar à vontade ✌️`
+    );
+  }
+};
+
 bot.start(async (ctx) => {
-  const nome = ctx.update.message.from.first_name;
-  await ctx.reply(
-    `Olá ${nome}, eu sou um Bot 🤖 e o meu nome é Educa IFS, mas você pode me chamar de Edu 😃!`
-  );
+  await verifyUser(ctx);
   await ctx.replyWithPhoto({ source: botImage }, buttonStart);
 });
 
