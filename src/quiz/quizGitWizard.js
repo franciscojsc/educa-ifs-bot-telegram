@@ -21,7 +21,11 @@ const quizGitWizard = new WizardScene(
   id,
   async (ctx) => {
     ctx.reply('😎', buttonOK);
-    ctx.wizard.state['db'] = await loadDB();
+    try {
+      ctx.wizard.state['db'] = await loadDB();
+    } catch (e) {
+      ctx.wizard.state['db'] = [];
+    }
     return ctx.wizard.next();
   },
   questionGitComposer,
