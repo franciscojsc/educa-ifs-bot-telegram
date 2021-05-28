@@ -3,6 +3,8 @@ const Stage = require('telegraf/stage');
 const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.TOKEN);
 
+const logger = require('./lib/logger');
+
 const path = require('path');
 const botImage = path.join(__dirname, 'assets', 'imgs', 'educaIFS_bot.png');
 
@@ -31,12 +33,6 @@ const stage = new Stage([
 bot.use(session());
 bot.use(stage.middleware());
 
-bot.catch((err, ctx) => {
-  ctx.reply(
-    `Estou com algum problema hoje, poderia conversar comigo mais tarde 🤕.`
-  );
-});
-
 const User = require('./models/user');
 
 const verifyUser = async (ctx) => {
@@ -55,6 +51,8 @@ const verifyUser = async (ctx) => {
         first_name: name,
         init_chat: true,
       });
+
+      logger.debug('Novo usuário');
     } else {
       await ctx.reply(
         `Olá ${name}, prazer te ver de novo!
@@ -62,6 +60,7 @@ const verifyUser = async (ctx) => {
       );
     }
   } catch (e) {
+    logger.error(e);
     await ctx.reply(
       `Olá ${name}, eu sou um Bot 🤖 e o meu nome é Educa IFS, mas você pode me chamar de Edu 😃!`
     );
@@ -119,6 +118,13 @@ bot.hears(/Voltar para o menu principal/i, (ctx) => {
 
 bot.on('message', async (ctx) => {
   await ctx.reply('Ops! Não entendi, tente novamente', buttonMenuDefault);
+});
+
+bot.catch((err, ctx) => {
+  logger.error(err);
+  ctx.reply(
+    `Estou com algum problema hoje, poderia conversar comigo mais tarde 🤕.`
+  );
 });
 
 module.exports = bot;
