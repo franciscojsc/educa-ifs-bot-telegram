@@ -4,6 +4,8 @@ const questionGitComposer = require('./step/questionGitComposer');
 
 const Quiz = require('./../models/quiz');
 
+const logger = require('./../lib/logger');
+
 const buttonsInline = require('./../buttons/buttonsInline');
 const buttonOK = buttonsInline.oneButton('Vamos lá?', 'ok');
 const id = 'QUIZ_GIT';
@@ -24,6 +26,7 @@ const quizGitWizard = new WizardScene(
     try {
       ctx.wizard.state['db'] = await loadDB();
     } catch (e) {
+      logger.error(e);
       ctx.wizard.state['db'] = [];
     }
     return ctx.wizard.next();
