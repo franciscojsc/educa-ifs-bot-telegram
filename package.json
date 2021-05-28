@@ -4,7 +4,8 @@
   "description": "Projeto destinado a ensinar Git utilizando um chatbot no aplicativo Telegram.",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js | pino-pretty -c -l"
   },
   "repository": {
     "type": "git",
