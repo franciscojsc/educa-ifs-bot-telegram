@@ -27,6 +27,7 @@ const id = 'FIRST_PROJECT';
 const firstProjectGitWizard = new WizardScene(
   id,
   async (ctx) => {
+    ctx.wizard.state['tutorial'] = id;
     await ctx.reply(
       'O Git é um sistema de versionamento de código criado por Linus Torvalds, o mesmo que criou o kernel Linux.',
       buttonOK

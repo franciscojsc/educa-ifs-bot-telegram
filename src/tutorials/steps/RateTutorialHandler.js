@@ -2,6 +2,7 @@ const Composer = require('telegraf/composer');
 const Extra = require('telegraf/extra');
 const Markup = require('telegraf/markup');
 
+const feedback = require('./../../lib/feedback');
 const buttonsKeyboard = require('./../../buttons/buttonsKeyboard');
 
 const buttonMenuDefault = buttonsKeyboard.twoButton('Quiz', 'Tutoriais', 2);
@@ -28,20 +29,24 @@ RateTutorialHandler.action('exit', async (ctx) => {
   );
 });
 
-RateTutorialHandler.action(['o', 'b', 'r', 'p'], async (ctx) => {
-  await ctx.replyWithMarkdown(`Muito obrigado pela sua resposta.
-  Grande abraço e até mais!`);
-  await ctx.reply('👋');
-  await ctx.reply('Que tal outro tutorial ou um quiz?', buttonMenuDefault);
-  await ctx.scene.leave();
+RateTutorialHandler.action('o', async (ctx) => {
+  await finallyTutorial(ctx, 'ótimo');
+});
+
+RateTutorialHandler.action('b', async (ctx) => {
+  await finallyTutorial(ctx, 'bom');
+});
+
+RateTutorialHandler.action('r', async (ctx) => {
+  await finallyTutorial(ctx, 'ruim');
+});
+
+RateTutorialHandler.action('p', async (ctx) => {
+  await finallyTutorial(ctx, 'péssimo');
 });
 
 RateTutorialHandler.action('nqr', async (ctx) => {
-  await ctx.replyWithMarkdown(`Muito obrigado por seguir o tutorial.
-  Grande abraço e até mais!`);
-  await ctx.reply('👋');
-  await ctx.reply('Que tal outro tutorial ou um quiz?', buttonMenuDefault);
-  await ctx.scene.leave();
+  await finallyTutorial(ctx);
 });
 
 RateTutorialHandler.hears(/Sair do tutorial/i, async (ctx) => {
@@ -55,5 +60,23 @@ RateTutorialHandler.hears(/Sair do tutorial/i, async (ctx) => {
 RateTutorialHandler.on('message', (ctx) => {
   ctx.reply('Confirme clicando nos botões :)');
 });
+
+const finallyTutorial = async (ctx, option) => {
+  if (!!option) {
+    const { id } = ctx.update.callback_query.from;
+    const { tutorial } = ctx.wizard.state;
+    const timestamp = Date.now();
+    await feedback(String(id), { tutorial, option, timestamp });
+    await await ctx.replyWithMarkdown(`Muito obrigado pela resposta e por seguir o tutorial.
+  Grande abraço e até mais!`);
+  } else {
+    await await ctx.replyWithMarkdown(`Muito obrigado por seguir o tutorial.
+    Grande abraço e até mais!`);
+  }
+
+  await ctx.reply('👋');
+  await ctx.reply('Que tal outro tutorial ou um quiz?', buttonMenuDefault);
+  await ctx.scene.leave();
+};
 
 module.exports = RateTutorialHandler;
