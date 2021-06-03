@@ -17,6 +17,7 @@ const id = 'CONTRIBUTE_PROJECT_GITHUB';
 const contributeProjectGitHubWizard = new WizardScene(
   id,
   async (ctx) => {
+    ctx.wizard.state['tutorial'] = id;
     await ctx.reply(
       'Agora vamos aprender como realizar uma contribuição em projetos no GitHub'
     );
