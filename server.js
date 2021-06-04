@@ -2,14 +2,21 @@ require('dotenv').config();
 const app = require('./src/index');
 const logger = require('./src/lib/logger');
 
-const express = require('express')();
+if (process.env.NODE_ENV == 'production') {
+  const express = require('express')();
 
-const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3000;
+  const url = process.env.URL;
+  const token = process.env.TOKEN;
 
-express
-  .get('/', (req, res) => {
-    res.json({ status: 'OK' });
-  })
-  .listen(port, () => logger.info(`App listening on port ${port}`));
+  app.telegram.setWebhook(`${url}/bot${token}`);
+  express.use(app.webhookCallback(`/bot${token}`));
 
-app.launch();
+  express
+    .get('/', (req, res) => {
+      res.json({ status: 'OK' });
+    })
+    .listen(port, () => logger.info(`App listening on port ${port}`));
+} else {
+  app.launch();
+}
