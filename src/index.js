@@ -4,6 +4,7 @@ const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.TOKEN);
 
 const logger = require('./lib/logger');
+const qna = require('./lib/qna');
 
 const path = require('path');
 const botImage = path.join(__dirname, 'assets', 'imgs', 'educaIFS_bot.png');
@@ -114,6 +115,30 @@ bot.hears(/Voltar para o menu principal/i, (ctx) => {
     'Escolha alguma opção: **Quiz** ou **Tutoriais**',
     buttonMenuDefault
   );
+});
+
+bot.on('text', async (ctx) => {
+  try {
+    const response = await qna(ctx.message.text);
+
+    if (response == 'No good match found in KB.') throw new Error(response);
+
+    await ctx.replyWithMarkdown(response);
+
+    await ctx.replyWithMarkdown(
+      new Date().getSeconds() % 2 == 0
+        ? `Fique à vontade para fazer outras perguntas sobre o Git 😉`
+        : `Posso ajudar em algo mais?`,
+      buttonMenuDefault
+    );
+  } catch (error) {
+    logger.error(error);
+
+    await ctx.reply(
+      `Desculpa 😞, ainda não sei a resposta, por favor, tente outra pergunta`,
+      buttonMenuDefault
+    );
+  }
 });
 
 bot.on('message', async (ctx) => {
