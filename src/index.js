@@ -124,13 +124,7 @@ bot.on('text', async (ctx) => {
     if (response == 'No good match found in KB.') throw new Error(response);
 
     await ctx.replyWithMarkdown(response);
-
-    await ctx.replyWithMarkdown(
-      new Date().getSeconds() % 2 == 0
-        ? `Fique à vontade para fazer outras perguntas sobre o Git 😉`
-        : `Posso ajudar em algo mais?`,
-      buttonMenuDefault
-    );
+    await responseRandom(ctx);
   } catch (error) {
     logger.error(error);
 
@@ -140,6 +134,15 @@ bot.on('text', async (ctx) => {
     );
   }
 });
+
+async function responseRandom(ctx) {
+  await ctx.replyWithMarkdown(
+    new Date().getSeconds() % 2 == 0
+      ? `Fique à vontade para fazer outras perguntas sobre o Git 😉`
+      : `Posso ajudar em algo mais?`,
+    buttonMenuDefault
+  );
+}
 
 bot.on('message', async (ctx) => {
   await ctx.reply('Ops! Não entendi, tente novamente', buttonMenuDefault);
