@@ -35,7 +35,6 @@ bot.use(session());
 bot.use(stage.middleware());
 
 const User = require('./models/user');
-const { response } = require('express');
 
 const verifyUser = async (ctx) => {
   const name = ctx.update.message.from.first_name;
@@ -118,28 +117,32 @@ bot.hears(/Voltar para o menu principal/i, (ctx) => {
   );
 });
 
-bot.on('text', (ctx) => {
-  qna(ctx.message.text)
-    .then((response) => {
-      if (response == 'No good match found in KB.') throw new Error(response);
-      ctx.replyWithMarkdown(response);
-    })
-    .then(() => {
-      ctx.replyWithMarkdown(
-        new Date().getSeconds() % 2 == 0
-          ? `Fique à vontade para fazer outras perguntas sobre o Git 😉`
-          : `Posso ajudar em algo mais?`,
-        buttonMenuDefault
-      );
-    })
-    .catch((error) => {
-      logger.error(error);
-      ctx.reply(
-        `Desculpa 😞, ainda não sei a resposta, por favor, tente outra pergunta`,
-        buttonMenuDefault
-      );
-    });
+bot.on('text', async (ctx) => {
+  try {
+    const response = await qna(ctx.message.text);
+
+    if (response == 'No good match found in KB.') throw new Error(response);
+
+    await ctx.replyWithMarkdown(response);
+    await responseRandom(ctx);
+  } catch (error) {
+    logger.error(error);
+
+    await ctx.reply(
+      `Desculpa 😞, ainda não sei a resposta, por favor, tente outra pergunta`,
+      buttonMenuDefault
+    );
+  }
 });
+
+async function responseRandom(ctx) {
+  await ctx.replyWithMarkdown(
+    new Date().getSeconds() % 2 == 0
+      ? `Fique à vontade para fazer outras perguntas sobre o Git 😉`
+      : `Posso ajudar em algo mais?`,
+    buttonMenuDefault
+  );
+}
 
 bot.on('message', async (ctx) => {
   await ctx.reply('Ops! Não entendi, tente novamente', buttonMenuDefault);
