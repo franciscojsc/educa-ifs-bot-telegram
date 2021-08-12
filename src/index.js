@@ -124,7 +124,10 @@ bot.on('text', async (ctx) => {
     if (response == 'No good match found in KB.') throw new Error(response);
 
     await ctx.replyWithMarkdown(response);
-    await responseRandom(ctx);
+
+    setTimeout(() => {
+      responseRandom(ctx);
+    }, 1000);
   } catch (error) {
     logger.error(error);
 
@@ -135,8 +138,8 @@ bot.on('text', async (ctx) => {
   }
 });
 
-async function responseRandom(ctx) {
-  await ctx.replyWithMarkdown(
+function responseRandom(ctx) {
+  ctx.replyWithMarkdown(
     new Date().getSeconds() % 2 == 0
       ? `Fique à vontade para fazer outras perguntas sobre o Git 😉`
       : `Posso ajudar em algo mais?`,
