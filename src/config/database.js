@@ -3,11 +3,17 @@ const logger = require('./../lib/logger');
 
 const MONGODB_URL = process.env.MONGODB_URL;
 
-const connectDB = async () =>
-  await mongoose.connect(MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  keepAlive: true,
+  keepAliveInitialDelay: 300000,
+};
+
+const connectDB = async (mongoose, url, options) => {
+  await mongoose.connect(url, options);
+};
 
 mongoose.Promise = global.Promise;
 
@@ -27,9 +33,6 @@ connection.on('exception', (error) => {
 
 connection.on('disconnected', async () => {
   logger.info(`Mongoose connection disconnected`);
-  logger.info(`Try connection in MongoDB database...`);
-  await mongoose.disconnect();
-  setTimeout(() => connectDB(), 3000);
 });
 
 connection.on('reconnected', () => {
@@ -49,6 +52,6 @@ process.on('SIGINT', () => {
   });
 });
 
-connectDB();
+connectDB(mongoose, MONGODB_URL, options);
 
 module.exports = mongoose;
